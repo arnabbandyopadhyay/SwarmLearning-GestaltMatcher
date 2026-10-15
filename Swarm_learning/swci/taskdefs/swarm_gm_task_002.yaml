@@ -1,0 +1,21 @@
+######################################################################
+# (C)Copyright 2021-2023 Hewlett Packard Enterprise Development LP
+######################################################################
+Name: swarm_gm_task_002
+TaskType: RUN_SWARM
+Author: HPESwarm
+Prereq: build_pyt_user_image_gm
+Outcome: swarm_gm_task_002
+Body:
+    Command: train_gm_arc.py
+    Entrypoint: python3
+    WorkingDir: /tmp/workspace/model
+    Envvars: ["MODEL_DIR": model, "MAX_EPOCHS": 2, "MIN_PEERS": 2]
+    PrivateContent: /tmp/privateworkspace/
+    SharedContent:
+    -   Src: /tmp/sl-play/workspace/gestalt_matcher/model
+        Tgt: /tmp/workspace/model
+        MType: BIND
+    -   Src: location of data
+        Tgt: /tmp/workspace/model/data
+        MType: BIND

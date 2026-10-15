@@ -1,0 +1,15 @@
+######################################################################
+# (C)Copyright 2022 Hewlett Packard Enterprise Development LP & Hartmut Schultze 
+######################################################################
+Name: pull_GM_user_image
+TaskType: PULL_IMAGE
+Author: HPESwarm
+Prereq: ROOTTASK
+Outcome: "outcome/gmdocker:version"
+Body:
+    Tag        : "v2.0"
+    RepoName   : "gmdocker"
+    OrgAndReg  : "location of registry"
+    Auth       : 
+        Username : xxxxxxx
+        Password : xxxxxxx

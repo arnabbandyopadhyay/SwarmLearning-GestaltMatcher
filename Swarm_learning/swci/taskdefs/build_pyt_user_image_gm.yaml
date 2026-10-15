@@ -1,0 +1,31 @@
+######################################################################
+# (C)Copyright 2021-2023 Hewlett Packard Enterprise Development LP
+######################################################################
+Name: build_pyt_user_image_gm
+TaskType: MAKE_USER_CONTAINER
+Author: HPESwarm
+Prereq: ROOTTASK
+Outcome: user-image-gm-pyt1.5
+Body:
+    BuildContext: sl-cli-lib
+    BuildType: INLINE
+    BuildSteps:
+    - FROM pytorch/pytorch:1.9.0-cuda10.2-cudnn7-runtime
+    - ' '
+    - RUN apt-get update && apt-get install           \
+    - '   build-essential python3-dev python3-pip     \'
+    - '   python3-setuptools ffmpeg libsm6 libxext6 --no-install-recommends -y'
+    - ' '
+    - ' '
+    - RUN pip3 install --upgrade pip protobuf==3.15.6 && pip3 install \
+    - '   argparse numpy tensorboard DateTime matplotlib scikit-image scikit-learn onnx2pytorch albumentations opencv-python pandas typing-extensions torchmetrics'
+    - ' '
+    - RUN pip3 install typing_extensions==4.7.1
+    - RUN pip3 install onnx==1.12.0
+    - RUN pip3 install torch==1.12.0+cu102 torchvision==0.13.0+cu102 torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu102 --no-cache-dir
+    - RUN pip3 install torchviz==0.0.2
+    - RUN pip3 install onnx2pytorch==0.4.1
+    - RUN pip3 install onnx2torch==1.4.1
+    - RUN mkdir -p /tmp/hpe-swarmcli-pkg
+    - COPY swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
+    - RUN pip3 install /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
