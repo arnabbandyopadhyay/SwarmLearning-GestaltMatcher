@@ -45,7 +45,7 @@ Swarm_learning/
 
 ## Prerequisites
 
-- HPE **Swarm Learning** installation [https://github.com/HewlettPackard/swarm-learning](https://github.com/HewlettPackard/swarm-learning) with a running SWCI server and at least one
+- HPE **Swarm Learning** installation ([https://github.com/HewlettPackard/swarm-learning])(https://github.com/HewlettPackard/swarm-learning) with a running SWCI server and at least one
   task runner/peer node per participant.
 - Docker (or equivalent) on the nodes that build/pull the user container.
 - The Swarm Learning PyTorch client wheel
